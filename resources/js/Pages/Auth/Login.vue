@@ -38,7 +38,7 @@ const setLoadingState = () => {
 
 <template>
     <GuestLayout>
-        <Head title="Log in" />
+        <Head title="Login" />
 
         <div v-if="status" class="mb-4 text-sm font-medium text-green-600">
             {{ status }}
@@ -82,7 +82,7 @@ const setLoadingState = () => {
                         class="w-full"
                         :class="{ 'opacity-25': form.processing }"
                     >
-                        Login
+                        Continue
                     </Button>
                     <Button
                         as="a"
@@ -93,7 +93,7 @@ const setLoadingState = () => {
                         :class="{ 'opacity-25': form.processing }"
                         @click="setLoadingState"
                     >
-                        Login with Github
+                        Continue with Github
                     </Button>
                 </form>
                 <div class="mt-4 text-center text-sm">

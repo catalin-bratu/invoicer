@@ -13,10 +13,6 @@ import { Label } from '@/Components/ui/label';
 import GuestLayout from '@/Layouts/GuestLayout.vue';
 import { Head, useForm } from '@inertiajs/vue3';
 
-defineProps<{
-    status?: string;
-}>();
-
 const form = useForm({
     email: '',
 });
@@ -50,7 +46,7 @@ const submit = () => {
                         class="w-full"
                         :class="{ 'opacity-25': form.processing }"
                     >
-                        Reset Password
+                        Continue
                     </Button>
                 </form>
             </CardContent>
