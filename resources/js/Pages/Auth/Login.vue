@@ -55,12 +55,7 @@ const setLoadingState = () => {
                 <form @submit.prevent="submit" class="grid gap-4">
                     <div class="grid gap-2">
                         <Label for="email">Email</Label>
-                        <Input
-                            id="email"
-                            type="email"
-                            placeholder="email@example.com"
-                            v-model="form.email"
-                        />
+                        <Input id="email" type="email" v-model="form.email" />
                         <InputError :message="form.errors.email" />
                     </div>
                     <div class="grid gap-2">
