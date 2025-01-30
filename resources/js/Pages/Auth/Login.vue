@@ -50,6 +50,9 @@ const setLoadingState = () => {
                 <CardDescription>
                     Enter your email below to login to your account
                 </CardDescription>
+                <CardDescription v-if="status" class="text-primary">
+                    {{ status }}
+                </CardDescription>
             </CardHeader>
             <CardContent>
                 <form @submit.prevent="submit" class="grid gap-4">
