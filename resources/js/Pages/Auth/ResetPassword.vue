@@ -1,8 +1,15 @@
 <script setup lang="ts">
 import InputError from '@/Components/InputError.vue';
-import InputLabel from '@/Components/InputLabel.vue';
-import PrimaryButton from '@/Components/PrimaryButton.vue';
-import TextInput from '@/Components/TextInput.vue';
+import { Button } from '@/Components/ui/button';
+import {
+    Card,
+    CardContent,
+    CardDescription,
+    CardHeader,
+    CardTitle,
+} from '@/Components/ui/card';
+import { Input } from '@/Components/ui/input';
+import { Label } from '@/Components/ui/label';
 import GuestLayout from '@/Layouts/GuestLayout.vue';
 import { Head, useForm } from '@inertiajs/vue3';
 
@@ -31,58 +38,53 @@ const submit = () => {
     <GuestLayout>
         <Head title="Reset Password" />
 
-        <form @submit.prevent="submit">
-            <div>
-                <InputLabel for="email" value="Email" />
-
-                <TextInput
-                    id="email"
-                    type="email"
-                    class="mt-1 block w-full"
-                    v-model="form.email"
-                    required
-                    autofocus
-                    autocomplete="username"
-                />
-
-                <InputError class="mt-2" :message="form.errors.email" />
-            </div>
-
-            <div class="mt-4">
-                <InputLabel for="password" value="Password" />
-
-                <TextInput
-                    id="password"
-                    type="password"
-                    class="mt-1 block w-full"
-                    v-model="form.password"
-                    required
-                    autocomplete="new-password"
-                />
-
-                <InputError class="mt-2" :message="form.errors.password" />
-            </div>
-
-            <div class="mt-4">
-                <InputLabel for="password_confirmation" value="Confirm Password" />
-
-                <TextInput
-                    id="password_confirmation"
-                    type="password"
-                    class="mt-1 block w-full"
-                    v-model="form.password_confirmation"
-                    required
-                    autocomplete="new-password"
-                />
-
-                <InputError class="mt-2" :message="form.errors.password_confirmation" />
-            </div>
-
-            <div class="mt-4 flex items-center justify-end">
-                <PrimaryButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                    Reset Password
-                </PrimaryButton>
-            </div>
-        </form>
+        <Card class="mx-auto max-w-sm">
+            <CardHeader>
+                <CardTitle>Reset Password</CardTitle>
+                <CardDescription>
+                    Enter a new password to reset the password on your account.
+                    We'll ask for this password whenever you log in.
+                </CardDescription>
+            </CardHeader>
+            <CardContent>
+                <form @submit.prevent="submit" class="grid gap-4">
+                    <div class="grid gap-2">
+                        <Label for="email">Email</Label>
+                        <Input id="email" type="email" v-model="form.email" />
+                        <InputError :message="form.errors.email" />
+                    </div>
+                    <div class="grid gap-2">
+                        <Label for="password">Password</Label>
+                        <Input
+                            id="password"
+                            type="password"
+                            v-model="form.password"
+                            autocomplete="new-password"
+                        />
+                        <InputError :message="form.errors.password" />
+                    </div>
+                    <div class="grid gap-2">
+                        <Label for="password_confirmation">Password</Label>
+                        <Input
+                            id="password_confirmation"
+                            type="password"
+                            v-model="form.password_confirmation"
+                            autocomplete="new-password"
+                        />
+                        <InputError
+                            :message="form.errors.password_confirmation"
+                        />
+                    </div>
+                    <Button
+                        :disabled="form.processing"
+                        type="submit"
+                        class="w-full"
+                        :class="{ 'opacity-25': form.processing }"
+                    >
+                        Continue
+                    </Button>
+                </form>
+            </CardContent>
+        </Card>
     </GuestLayout>
 </template>
