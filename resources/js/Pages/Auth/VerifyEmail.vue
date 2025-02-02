@@ -41,7 +41,6 @@ const statusMessage = computed(() =>
                     :disabled="form.processing"
                     type="submit"
                     class="w-full"
-                    :class="{ 'opacity-25': form.processing }"
                 >
                     Resend Verification Email
                 </Button>
@@ -51,7 +50,6 @@ const statusMessage = computed(() =>
                     :disabled="form.processing"
                     variant="outline"
                     class="w-full"
-                    :class="{ 'opacity-25': form.processing }"
                 >
                     Log Out
                 </Button>

@@ -27,10 +27,6 @@ const submit = () => {
         },
     });
 };
-
-const setLoadingState = () => {
-    form.processing = true;
-};
 </script>
 
 <template>
@@ -65,7 +61,6 @@ const setLoadingState = () => {
                     :disabled="form.processing"
                     type="submit"
                     class="w-full"
-                    :class="{ 'opacity-25': form.processing }"
                 >
                     Continue
                 </Button>
@@ -75,8 +70,6 @@ const setLoadingState = () => {
                     :disabled="form.processing"
                     variant="outline"
                     class="w-full"
-                    :class="{ 'opacity-25': form.processing }"
-                    @click="setLoadingState"
                 >
                     Continue with Github
                 </Button>

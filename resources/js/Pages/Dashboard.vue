@@ -1,10 +1,12 @@
 <script setup lang="ts">
 import { Button } from '@/Components/ui/button';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import { Head } from '@inertiajs/vue3';
 </script>
 
 <template>
     <AuthenticatedLayout>
+        <Head title="Dashboard" />
         <div class="flex items-center">
             <h1 class="text-lg font-semibold md:text-2xl">Dashboard</h1>
         </div>
