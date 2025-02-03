@@ -2,7 +2,7 @@
 import ApplicationLogo from '@/Components/ApplicationLogo.vue';
 import NavLink from '@/Components/NavLink.vue';
 import { Link } from '@inertiajs/vue3';
-import { HomeIcon } from '@radix-icons/vue';
+import { BackpackIcon, HomeIcon } from '@radix-icons/vue';
 </script>
 
 <template>
@@ -24,6 +24,13 @@ import { HomeIcon } from '@radix-icons/vue';
                 >
                     <HomeIcon class="h-4 w-4" />
                     Dashboard
+                </NavLink>
+                <NavLink
+                    :href="route('customers.index')"
+                    :active="route().current('customers.index')"
+                >
+                    <BackpackIcon class="h-4 w-4" />
+                    Customers
                 </NavLink>
             </nav>
         </div>

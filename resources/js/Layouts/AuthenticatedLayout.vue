@@ -44,7 +44,7 @@ onUnmounted(() => {
         <div class="hidden border-r bg-muted/40 md:block">
             <Sidebar />
         </div>
-        <div class="flex flex-col">
+        <div class="flex flex-col overflow-hidden">
             <header
                 class="flex h-14 items-center gap-3 border-b bg-muted/40 px-4 lg:px-6"
             >
