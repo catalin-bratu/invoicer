@@ -16,7 +16,7 @@ class CustomerController extends Controller
     public function index(): Response
     {
         return Inertia::render('Customers/Index', [
-            'customers' => Customer::all()
+            'customers' => Customer::query()->orderBy('name')->get()
         ]);
     }
 

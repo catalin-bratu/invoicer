@@ -11,6 +11,7 @@ export interface Customer {
     vat?: string;
     email?: string;
     phone?: string;
+    created_at: string;
 }
 
 export type PageProps<
