@@ -1,5 +1,13 @@
 <script setup lang="ts">
 import {
+    Breadcrumb,
+    BreadcrumbItem,
+    BreadcrumbLink,
+    BreadcrumbList,
+    BreadcrumbPage,
+    BreadcrumbSeparator,
+} from '@/Components/ui/breadcrumb';
+import {
     Card,
     CardContent,
     CardDescription,
@@ -16,6 +24,7 @@ import {
 } from '@/Components/ui/table';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Customer } from '@/types';
+import { Link } from '@inertiajs/vue3';
 import { formatDate, normalizeDate } from '@vueuse/core';
 
 defineProps<{
@@ -28,6 +37,17 @@ const formatDateForDisplay = (date: string) =>
 
 <template>
     <AuthenticatedLayout>
+        <Breadcrumb>
+            <BreadcrumbList>
+                <BreadcrumbItem>
+                    <BreadcrumbLink as-child>
+                        <Link :href="route('dashboard')">Dashboard</Link>
+                    </BreadcrumbLink>
+                </BreadcrumbItem>
+                <BreadcrumbSeparator />
+                <BreadcrumbPage>Customers</BreadcrumbPage>
+            </BreadcrumbList>
+        </Breadcrumb>
         <Card>
             <CardHeader>
                 <CardTitle class="px-2">Customers</CardTitle>
