@@ -46,7 +46,7 @@ onUnmounted(() => {
         </div>
         <div class="flex flex-col overflow-hidden">
             <header
-                class="flex h-14 items-center gap-3 border-b bg-muted/40 px-4 lg:px-6"
+                class="flex h-14 items-center gap-2 border-b bg-muted/40 px-4"
             >
                 <Sheet v-model:open="isMobileSidebarOpen">
                     <SheetTrigger as-child>
