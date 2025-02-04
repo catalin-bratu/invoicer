@@ -15,8 +15,16 @@ class CustomerController extends Controller
      */
     public function index(): Response
     {
+        $search = request()->query('search');
+
         return Inertia::render('Customers/Index', [
-            'customers' => Customer::query()->orderBy('name')->get()
+            'search' => $search,
+            'customers' => Customer::query()
+                ->orderBy('name')
+                ->when($search, fn($query, $search) => $query
+                    ->where('name', 'like', '%' . $search . '%')
+                    ->orWhere('vat', 'like', '%' . $search . '%'))
+                ->get()
         ]);
     }
 

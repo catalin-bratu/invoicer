@@ -14,6 +14,7 @@ import {
     CardHeader,
     CardTitle,
 } from '@/Components/ui/card';
+import { Input } from '@/Components/ui/input';
 import {
     Table,
     TableBody,
@@ -24,12 +25,24 @@ import {
 } from '@/Components/ui/table';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Customer } from '@/types';
-import { Link } from '@inertiajs/vue3';
-import { formatDate, normalizeDate } from '@vueuse/core';
+import { Link, router } from '@inertiajs/vue3';
+import { formatDate, normalizeDate, useDebounceFn } from '@vueuse/core';
+import { ref } from 'vue';
 
-defineProps<{
+const props = defineProps<{
     customers: Customer[];
+    search?: string;
 }>();
+
+const searchQuery = ref(props.search);
+
+const throttleSearch = useDebounceFn(() => {
+    router.get(
+        route('customers.index'),
+        { search: searchQuery.value },
+        { preserveState: true },
+    );
+});
 
 const formatDateForDisplay = (date: string) =>
     formatDate(normalizeDate(date), 'MMM DD YYYY HH:mm');
@@ -50,12 +63,16 @@ const formatDateForDisplay = (date: string) =>
         </Breadcrumb>
         <Card>
             <CardHeader>
-                <CardTitle class="px-2">Customers</CardTitle>
-                <CardDescription class="px-2">
-                    Manage your customers.
-                </CardDescription>
+                <CardTitle>Customers</CardTitle>
+                <CardDescription> Manage your customers. </CardDescription>
             </CardHeader>
-            <CardContent>
+            <CardContent class="space-y-4">
+                <Input
+                    v-model="searchQuery"
+                    placeholder="Filter customers..."
+                    class="h-8 w-[150px] lg:w-[250px]"
+                    @input="throttleSearch"
+                />
                 <Table>
                     <TableHeader>
                         <TableRow>
