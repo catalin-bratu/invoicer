@@ -69,7 +69,7 @@ const formatDateForDisplay = (date: string) =>
                 <BreadcrumbPage>Customers</BreadcrumbPage>
             </BreadcrumbList>
         </Breadcrumb>
-        <Card v-if="customers.data.length">
+        <Card v-if="customers.data.length || search">
             <CardHeader>
                 <CardTitle>Customers</CardTitle>
                 <CardDescription> Manage your customers. </CardDescription>
@@ -77,7 +77,7 @@ const formatDateForDisplay = (date: string) =>
             <CardContent class="space-y-4">
                 <div class="flex items-center justify-between">
                     <Button size="sm" variant="outline">Add Customer</Button>
-                    <div class="relative w-60 items-center">
+                    <div class="relative w-56 items-center">
                         <Input
                             v-model="searchQuery"
                             type="text"
@@ -120,7 +120,10 @@ const formatDateForDisplay = (date: string) =>
                         </TableRow>
                     </TableBody>
                 </Table>
-                <div class="flex items-center justify-between">
+                <div
+                    v-if="customers.data.length"
+                    class="flex items-center justify-between"
+                >
                     <Button as-child variant="outline" size="icon">
                         <Link
                             preserve-state
@@ -145,6 +148,9 @@ const formatDateForDisplay = (date: string) =>
                         </Link>
                     </Button>
                 </div>
+                <p v-else class="text-center text-sm font-medium">
+                    We couldn't find any results based on your search.
+                </p>
             </CardContent>
         </Card>
         <div
