@@ -77,7 +77,7 @@ const formatDateForDisplay = (date: string) =>
             <CardContent class="space-y-4">
                 <div class="flex items-center justify-between">
                     <Button size="sm" variant="outline">Add Customer</Button>
-                    <div class="relative w-64 items-center">
+                    <div class="relative w-60 items-center">
                         <Input
                             v-model="searchQuery"
                             type="text"
