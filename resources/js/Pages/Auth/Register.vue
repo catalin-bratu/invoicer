@@ -64,26 +64,22 @@ const submit = () => {
                     />
                     <InputError :message="form.errors.password_confirmation" />
                 </div>
-                <Button
-                    :disabled="form.processing"
-                    type="submit"
-                    class="w-full"
-                >
+                <Button :disabled="form.processing" type="submit">
                     Continue
                 </Button>
                 <Button
                     as="a"
                     :href="route('login.redirect')"
-                    :disabled="form.processing"
                     variant="outline"
-                    class="w-full"
                 >
                     Continue with Github
                 </Button>
             </form>
             <div class="text-center text-sm">
                 Already registered?
-                <Link :href="route('login')" class="underline"> Sign in </Link>
+                <Button variant="link" as-child>
+                    <Link :href="route('login')">Sign in</Link>
+                </Button>
             </div>
         </AuthCard>
     </GuestLayout>

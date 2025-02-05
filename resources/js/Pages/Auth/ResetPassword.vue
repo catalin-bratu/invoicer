@@ -63,11 +63,7 @@ const submit = () => {
                     />
                     <InputError :message="form.errors.password_confirmation" />
                 </div>
-                <Button
-                    :disabled="form.processing"
-                    type="submit"
-                    class="w-full"
-                >
+                <Button :disabled="form.processing" type="submit">
                     Continue
                 </Button>
             </form>

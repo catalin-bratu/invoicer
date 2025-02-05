@@ -30,11 +30,7 @@ const submit = () => {
                     <Input id="email" type="email" v-model="form.email" />
                     <InputError :message="form.errors.email" />
                 </div>
-                <Button
-                    :disabled="form.processing"
-                    type="submit"
-                    class="w-full"
-                >
+                <Button :disabled="form.processing" type="submit">
                     Continue
                 </Button>
             </form>

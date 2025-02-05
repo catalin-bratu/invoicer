@@ -43,12 +43,15 @@ const submit = () => {
                 <div class="grid gap-2">
                     <div class="flex items-center">
                         <Label for="password">Password</Label>
-                        <Link
-                            :href="route('password.request')"
-                            class="ml-auto inline-block text-sm underline"
+                        <Button
+                            variant="link"
+                            as-child
+                            class="ml-auto leading-none"
                         >
-                            Forgot your password?
-                        </Link>
+                            <Link :href="route('password.request')">
+                                Forgot your password?
+                            </Link>
+                        </Button>
                     </div>
                     <Input
                         id="password"
@@ -57,28 +60,22 @@ const submit = () => {
                     />
                     <InputError :message="form.errors.password" />
                 </div>
-                <Button
-                    :disabled="form.processing"
-                    type="submit"
-                    class="w-full"
-                >
+                <Button :disabled="form.processing" type="submit">
                     Continue
                 </Button>
                 <Button
                     as="a"
                     :href="route('login.redirect')"
-                    :disabled="form.processing"
                     variant="outline"
-                    class="w-full"
                 >
                     Continue with Github
                 </Button>
             </form>
             <div class="text-center text-sm">
                 Don't have an account?
-                <Link :href="route('register')" class="underline">
-                    Sign up
-                </Link>
+                <Button variant="link" as-child>
+                    <Link :href="route('register')">Sign up</Link>
+                </Button>
             </div>
         </AuthCard>
     </GuestLayout>
