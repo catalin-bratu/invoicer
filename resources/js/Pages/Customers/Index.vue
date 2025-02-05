@@ -7,6 +7,7 @@ import {
     BreadcrumbPage,
     BreadcrumbSeparator,
 } from '@/Components/ui/breadcrumb';
+import { Button } from '@/Components/ui/button';
 import {
     Card,
     CardContent,
@@ -24,14 +25,15 @@ import {
     TableRow,
 } from '@/Components/ui/table';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import { Customer } from '@/types';
-import { Link, router } from '@inertiajs/vue3';
+import { Customer, Paginator } from '@/types';
+import { Head, Link, router } from '@inertiajs/vue3';
+import { ChevronLeftIcon, ChevronRightIcon } from '@radix-icons/vue';
 import { formatDate, normalizeDate, useDebounceFn } from '@vueuse/core';
 import { isEmpty, shake } from 'radashi';
 import { ref } from 'vue';
 
 const props = defineProps<{
-    customers: Customer[];
+    customers: Paginator<Customer>;
     search?: string;
 }>();
 
@@ -51,6 +53,7 @@ const formatDateForDisplay = (date: string) =>
 
 <template>
     <AuthenticatedLayout>
+        <Head title="Customers" />
         <Breadcrumb>
             <BreadcrumbList>
                 <BreadcrumbItem>
@@ -86,7 +89,7 @@ const formatDateForDisplay = (date: string) =>
                     </TableHeader>
                     <TableBody>
                         <TableRow
-                            v-for="customer in customers"
+                            v-for="customer in customers.data"
                             :key="customer.id"
                         >
                             <TableCell>{{ customer.name }}</TableCell>
@@ -99,6 +102,28 @@ const formatDateForDisplay = (date: string) =>
                         </TableRow>
                     </TableBody>
                 </Table>
+                <div class="flex items-center justify-between">
+                    <Button as-child variant="outline" size="icon">
+                        <Link
+                            preserve-state
+                            as="button"
+                            :href="customers.prev_page_url ?? ''"
+                            :disabled="!customers.prev_page_url"
+                        >
+                            <ChevronLeftIcon />
+                        </Link>
+                    </Button>
+                    <Button as-child variant="outline" size="icon">
+                        <Link
+                            preserve-state
+                            as="button"
+                            :href="customers.next_page_url ?? ''"
+                            :disabled="!customers.next_page_url"
+                        >
+                            <ChevronRightIcon />
+                        </Link>
+                    </Button>
+                </div>
             </CardContent>
         </Card>
     </AuthenticatedLayout>

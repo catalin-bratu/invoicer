@@ -21,3 +21,9 @@ export type PageProps<
         user: User;
     };
 };
+
+export interface Paginator<T> {
+    data: T[];
+    prev_page_url: string | null;
+    next_page_url: string | null;
+}

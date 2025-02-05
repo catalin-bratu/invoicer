@@ -25,7 +25,8 @@ class CustomerController extends Controller
                     ->where('name', 'like', '%' . $search . '%')
                     ->orWhere('vat', 'like', '%' . $search . '%'))
                 ->orderBy('name')
-                ->get()
+                ->simplePaginate(25)
+                ->withQueryString()
         ]);
     }
 
