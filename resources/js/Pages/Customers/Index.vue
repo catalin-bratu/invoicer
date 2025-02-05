@@ -27,6 +27,7 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Customer } from '@/types';
 import { Link, router } from '@inertiajs/vue3';
 import { formatDate, normalizeDate, useDebounceFn } from '@vueuse/core';
+import { isEmpty, shake } from 'radashi';
 import { ref } from 'vue';
 
 const props = defineProps<{
@@ -39,7 +40,7 @@ const searchQuery = ref(props.search);
 const throttleSearch = useDebounceFn(() => {
     router.get(
         route('customers.index'),
-        searchQuery.value ? { search: searchQuery.value } : undefined,
+        shake({ search: searchQuery.value }, isEmpty),
         { preserveState: true },
     );
 });
