@@ -39,7 +39,7 @@ const searchQuery = ref(props.search);
 const throttleSearch = useDebounceFn(() => {
     router.get(
         route('customers.index'),
-        { search: searchQuery.value },
+        searchQuery.value ? { search: searchQuery.value } : undefined,
         { preserveState: true },
     );
 });

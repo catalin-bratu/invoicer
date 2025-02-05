@@ -21,6 +21,8 @@ class CustomerFactory extends Factory
             'vat' => fake()->countryCode() . fake()->randomNumber(8, true),
             'email' => fake()->companyEmail(),
             'phone' => fake()->e164PhoneNumber(),
+            'iban' => fake()->iban(),
+            'bank' => fake()->company(),
         ];
     }
 }

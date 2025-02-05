@@ -20,10 +20,11 @@ class CustomerController extends Controller
         return Inertia::render('Customers/Index', [
             'search' => $search,
             'customers' => Customer::query()
-                ->orderBy('name')
+                ->whereBelongsTo(request()->user())
                 ->when($search, fn($query, $search) => $query
                     ->where('name', 'like', '%' . $search . '%')
                     ->orWhere('vat', 'like', '%' . $search . '%'))
+                ->orderBy('name')
                 ->get()
         ]);
     }

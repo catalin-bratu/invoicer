@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('vat');
             $table->string('email')->nullable();
             $table->string('phone')->nullable();
+            $table->string('iban')->nullable();
+            $table->string('bank')->nullable();
             $table->timestamps();
         });
     }
