@@ -27,7 +27,11 @@ import {
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Customer, Paginator } from '@/types';
 import { Head, Link, router } from '@inertiajs/vue3';
-import { ChevronLeftIcon, ChevronRightIcon } from '@radix-icons/vue';
+import {
+    ChevronLeftIcon,
+    ChevronRightIcon,
+    MagnifyingGlassIcon,
+} from '@radix-icons/vue';
 import { formatDate, normalizeDate, useDebounceFn } from '@vueuse/core';
 import { isEmpty, shake } from 'radashi';
 import { ref } from 'vue';
@@ -71,12 +75,26 @@ const formatDateForDisplay = (date: string) =>
                 <CardDescription> Manage your customers. </CardDescription>
             </CardHeader>
             <CardContent class="space-y-4">
-                <Input
-                    v-model="searchQuery"
-                    placeholder="Filter customers..."
-                    class="w-256 ml-auto h-8"
-                    @input="throttleSearch"
-                />
+                <div class="flex items-center justify-between">
+                    <Button size="sm" variant="outline">Add Customer</Button>
+                    <div class="relative w-64 items-center">
+                        <Input
+                            v-model="searchQuery"
+                            type="text"
+                            autocomplete="off"
+                            placeholder="Filter customers..."
+                            class="h-8 pl-10"
+                            @input="throttleSearch"
+                        />
+                        <span
+                            class="absolute inset-y-0 start-0 flex items-center justify-center px-2"
+                        >
+                            <MagnifyingGlassIcon
+                                class="size-6 text-muted-foreground"
+                            />
+                        </span>
+                    </div>
+                </div>
                 <Table>
                     <TableHeader>
                         <TableRow>
@@ -113,6 +131,9 @@ const formatDateForDisplay = (date: string) =>
                             <ChevronLeftIcon />
                         </Link>
                     </Button>
+                    <div class="text-sm font-medium">
+                        Showing {{ customers.from }} to {{ customers.to }}
+                    </div>
                     <Button as-child variant="outline" size="icon">
                         <Link
                             preserve-state
