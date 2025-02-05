@@ -65,7 +65,7 @@ const formatDateForDisplay = (date: string) =>
                 <BreadcrumbPage>Customers</BreadcrumbPage>
             </BreadcrumbList>
         </Breadcrumb>
-        <Card>
+        <Card v-if="customers.data.length">
             <CardHeader>
                 <CardTitle>Customers</CardTitle>
                 <CardDescription> Manage your customers. </CardDescription>
@@ -74,7 +74,7 @@ const formatDateForDisplay = (date: string) =>
                 <Input
                     v-model="searchQuery"
                     placeholder="Filter customers..."
-                    class="h-8 w-[150px] lg:w-[250px]"
+                    class="w-256 ml-auto h-8"
                     @input="throttleSearch"
                 />
                 <Table>
@@ -126,5 +126,19 @@ const formatDateForDisplay = (date: string) =>
                 </div>
             </CardContent>
         </Card>
+        <div
+            v-else
+            class="flex flex-1 items-center justify-center rounded-xl border-2 border-dashed bg-card text-card-foreground"
+        >
+            <div class="flex flex-col items-center gap-1 text-center">
+                <h3 class="text-2xl font-bold tracking-tight">
+                    You have no customers
+                </h3>
+                <p class="text-sm text-muted-foreground">
+                    You can start selling as soon as you add a customer.
+                </p>
+                <Button class="mt-4"> Add Customer </Button>
+            </div>
+        </div>
     </AuthenticatedLayout>
 </template>
