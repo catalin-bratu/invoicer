@@ -57,7 +57,7 @@ const formatDateForDisplay = (date: string) =>
 
 <template>
     <AuthenticatedLayout>
-        <Head title="Customers" />
+        <Head title="Create Customer" />
         <Breadcrumb>
             <BreadcrumbList>
                 <BreadcrumbItem>
@@ -76,7 +76,11 @@ const formatDateForDisplay = (date: string) =>
             </CardHeader>
             <CardContent class="space-y-4">
                 <div class="flex items-center justify-between">
-                    <Button size="sm" variant="outline">Add Customer</Button>
+                    <Button size="sm" variant="outline" as-child>
+                        <Link :href="route('customers.create')">
+                            Create Customer
+                        </Link>
+                    </Button>
                     <div class="relative w-56 items-center">
                         <Input
                             v-model="searchQuery"

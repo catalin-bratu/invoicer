@@ -12,6 +12,16 @@ class Customer extends Model
     /** @use HasFactory<\Database\Factories\CustomerFactory> */
     use HasFactory, HasUlids;
 
+    protected $fillable = [
+        'user_id',
+        'name',
+        'vat',
+        'email',
+        'phone',
+        'iban',
+        'bank'
+    ];
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreCustomerRequest;
 use App\Http\Requests\UpdateCustomerRequest;
 use App\Models\Customer;
+use Illuminate\Http\RedirectResponse;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -24,7 +25,7 @@ class CustomerController extends Controller
                 ->when($search, fn($query, $search) => $query
                     ->where('name', 'like', '%' . $search . '%')
                     ->orWhere('vat', 'like', '%' . $search . '%'))
-                ->orderBy('name')
+                ->orderByRaw('lower(name)')
                 ->simplePaginate(25)
                 ->withQueryString()
         ]);
@@ -33,17 +34,19 @@ class CustomerController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(): Response
     {
-        //
+        return Inertia::render('Customers/Create', []);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreCustomerRequest $request)
+    public function store(StoreCustomerRequest $request): RedirectResponse
     {
-        //
+        Customer::create([...$request->all(), 'user_id' => $request->user()->id]);
+
+        return to_route('customers.index');
     }
 
     /**
