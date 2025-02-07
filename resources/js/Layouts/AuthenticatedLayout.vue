@@ -10,7 +10,8 @@ import {
     DropdownMenuTrigger,
 } from '@/Components/ui/dropdown-menu';
 import { Sheet, SheetContent, SheetTrigger } from '@/Components/ui/sheet';
-import { Link } from '@inertiajs/vue3';
+import { Toaster, useToast } from '@/Components/ui/toast';
+import { Link, usePage } from '@inertiajs/vue3';
 import {
     Half2Icon,
     HamburgerMenuIcon,
@@ -19,7 +20,7 @@ import {
     SunIcon,
 } from '@radix-icons/vue';
 import { useColorMode } from '@vueuse/core';
-import { onMounted, onUnmounted, ref } from 'vue';
+import { computed, onMounted, onUnmounted, ref } from 'vue';
 
 const isMobileSidebarOpen = ref(false);
 const closeMobileSidebar = () => {
@@ -28,12 +29,26 @@ const closeMobileSidebar = () => {
 
 const colorMode = useColorMode({ emitAuto: true });
 
+const page = usePage();
+
+const { toast, dismiss } = useToast();
+
+const status = computed(() => page.props.status);
+
 onMounted(() => {
     window.addEventListener('resize', closeMobileSidebar);
+
+    if (status.value) {
+        toast({
+            description: status.value,
+        });
+    }
 });
 
 onUnmounted(() => {
     window.removeEventListener('resize', closeMobileSidebar);
+
+    dismiss();
 });
 </script>
 
@@ -129,6 +144,7 @@ onUnmounted(() => {
             >
                 <slot />
             </main>
+            <Toaster />
         </div>
     </div>
 </template>

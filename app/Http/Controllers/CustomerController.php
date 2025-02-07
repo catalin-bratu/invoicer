@@ -46,7 +46,7 @@ class CustomerController extends Controller
     {
         Customer::create([...$request->all(), 'user_id' => $request->user()->id]);
 
-        return to_route('customers.index');
+        return redirect('customers.index')->with('success', 'Customer created.');
     }
 
     /**

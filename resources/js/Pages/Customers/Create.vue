@@ -57,32 +57,62 @@ const submit = () => {
                 <form @submit.prevent="submit" class="grid gap-4">
                     <div class="grid gap-2">
                         <Label for="name">Name</Label>
-                        <Input id="name" type="text" v-model="form.name" />
+                        <Input
+                            id="name"
+                            type="text"
+                            v-model="form.name"
+                            autocomplete="off"
+                        />
                         <InputError :message="form.errors.name" />
                     </div>
                     <div class="grid gap-2">
                         <Label for="vat">VAT</Label>
-                        <Input id="vat" type="text" v-model="form.vat" />
+                        <Input
+                            id="vat"
+                            type="text"
+                            v-model="form.vat"
+                            autocomplete="off"
+                        />
                         <InputError :message="form.errors.vat" />
                     </div>
                     <div class="grid gap-2">
                         <Label for="email">Email</Label>
-                        <Input id="email" type="email" v-model="form.email" />
+                        <Input
+                            id="email"
+                            type="email"
+                            v-model="form.email"
+                            autocomplete="off"
+                        />
                         <InputError :message="form.errors.email" />
                     </div>
                     <div class="grid gap-2">
                         <Label for="phone">Phone</Label>
-                        <Input id="phone" type="tel" v-model="form.phone" />
+                        <Input
+                            id="phone"
+                            type="tel"
+                            v-model="form.phone"
+                            autocomplete="off"
+                        />
                         <InputError :message="form.errors.phone" />
                     </div>
                     <div class="grid gap-2">
                         <Label for="iban">IBAN</Label>
-                        <Input id="iban" type="text" v-model="form.iban" />
+                        <Input
+                            id="iban"
+                            type="text"
+                            v-model="form.iban"
+                            autocomplete="off"
+                        />
                         <InputError :message="form.errors.iban" />
                     </div>
                     <div class="grid gap-2">
                         <Label for="bank">Bank</Label>
-                        <Input id="bank" type="text" v-model="form.bank" />
+                        <Input
+                            id="bank"
+                            type="text"
+                            v-model="form.bank"
+                            autocomplete="off"
+                        />
                         <InputError :message="form.errors.bank" />
                     </div>
                     <Button

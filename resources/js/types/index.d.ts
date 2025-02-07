@@ -20,6 +20,7 @@ export type PageProps<
     auth: {
         user: User;
     };
+    status?: string;
 };
 
 export interface Paginator<T> {
