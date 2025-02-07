@@ -18,7 +18,7 @@ class CustomerFactory extends Factory
     {
         return [
             'name' => fake()->company(),
-            'vat' => fake()->countryCode() . fake()->randomNumber(8, true),
+            'vat' => fake()->countryCode().fake()->randomNumber(8, true),
             'email' => fake()->companyEmail(),
             'phone' => fake()->e164PhoneNumber(),
             'iban' => fake()->iban(),

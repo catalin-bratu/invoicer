@@ -19,7 +19,7 @@ class Customer extends Model
         'email',
         'phone',
         'iban',
-        'bank'
+        'bank',
     ];
 
     public function user(): BelongsTo

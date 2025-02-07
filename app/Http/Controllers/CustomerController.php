@@ -22,12 +22,12 @@ class CustomerController extends Controller
             'search' => $search,
             'customers' => Customer::query()
                 ->whereBelongsTo(request()->user())
-                ->when($search, fn($query, $search) => $query
-                    ->where('name', 'like', '%' . $search . '%')
-                    ->orWhere('vat', 'like', '%' . $search . '%'))
+                ->when($search, fn ($query, $search) => $query
+                    ->where('name', 'like', '%'.$search.'%')
+                    ->orWhere('vat', 'like', '%'.$search.'%'))
                 ->orderByRaw('lower(name)')
                 ->simplePaginate(25)
-                ->withQueryString()
+                ->withQueryString(),
         ]);
     }
 
