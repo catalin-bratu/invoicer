@@ -13,25 +13,36 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/Components/ui/card';
 import { Input } from '@/Components/ui/input';
 import { Label } from '@/Components/ui/label';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import { Customer } from '@/types';
 import { Head, Link, useForm } from '@inertiajs/vue3';
 
+const props = defineProps<{
+    customer: Customer;
+}>();
+
 const form = useForm({
-    name: '',
-    vat: '',
-    email: '',
-    phone: '',
-    iban: '',
-    bank: '',
+    name: props.customer.name,
+    vat: props.customer.vat,
+    email: props.customer.email,
+    phone: props.customer.phone,
+    iban: props.customer.iban,
+    bank: props.customer.bank,
 });
 
 const submit = () => {
-    form.post(route('customers.store'));
+    form.patch(route('customers.update', { id: props.customer.id }));
+};
+
+const destroy = () => {
+    if (confirm('Are you sure you want to delete this customer?')) {
+        form.delete(route('customers.destroy', { id: props.customer.id }));
+    }
 };
 </script>
 
 <template>
     <AuthenticatedLayout>
-        <Head title="Create Customer" />
+        <Head :title="customer.name" />
         <Breadcrumb>
             <BreadcrumbList>
                 <BreadcrumbItem>
@@ -46,12 +57,22 @@ const submit = () => {
                     </BreadcrumbLink>
                 </BreadcrumbItem>
                 <BreadcrumbSeparator />
-                <BreadcrumbPage>Create Customer</BreadcrumbPage>
+                <BreadcrumbPage>Edit Customer</BreadcrumbPage>
             </BreadcrumbList>
         </Breadcrumb>
         <Card class="max-w-md">
             <CardHeader>
-                <CardTitle>Create Customer</CardTitle>
+                <CardTitle class="flex items-center justify-between">
+                    {{ props.customer.name }}
+                    <Button
+                        :disabled="form.processing"
+                        variant="destructive"
+                        class="w-fit"
+                        @click.prevent="destroy"
+                    >
+                        Delete
+                    </Button>
+                </CardTitle>
             </CardHeader>
             <CardContent class="grid gap-4">
                 <form @submit.prevent="submit" class="grid gap-4">
@@ -115,13 +136,23 @@ const submit = () => {
                         />
                         <InputError :message="form.errors.bank" />
                     </div>
-                    <Button
-                        :disabled="form.processing"
-                        type="submit"
-                        class="ml-auto w-fit"
-                    >
-                        Create
-                    </Button>
+                    <div class="flex justify-between">
+                        <Button
+                            :disabled="form.processing"
+                            variant="secondary"
+                            class="w-fit"
+                            @click.prevent="form.reset()"
+                        >
+                            Discard
+                        </Button>
+                        <Button
+                            :disabled="form.processing"
+                            type="submit"
+                            class="w-fit"
+                        >
+                            Save
+                        </Button>
+                    </div>
                 </form>
             </CardContent>
         </Card>

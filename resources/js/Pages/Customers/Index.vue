@@ -57,7 +57,7 @@ const formatDateForDisplay = (date: string) =>
 
 <template>
     <AuthenticatedLayout>
-        <Head title="Create Customer" />
+        <Head title="Customers" />
         <Breadcrumb>
             <BreadcrumbList>
                 <BreadcrumbItem>
@@ -107,6 +107,9 @@ const formatDateForDisplay = (date: string) =>
                             <TableHead>Phone</TableHead>
                             <TableHead>Email</TableHead>
                             <TableHead>Created at</TableHead>
+                            <TableHead>
+                                <span class="sr-only">Edit</span>
+                            </TableHead>
                         </TableRow>
                     </TableHeader>
                     <TableBody>
@@ -120,6 +123,20 @@ const formatDateForDisplay = (date: string) =>
                             <TableCell>{{ customer.email }}</TableCell>
                             <TableCell class="whitespace-nowrap">
                                 {{ formatDateForDisplay(customer.created_at) }}
+                            </TableCell>
+                            <TableCell>
+                                <Button as-child variant="link" size="icon">
+                                    <Link
+                                        as="button"
+                                        :href="
+                                            route('customers.edit', {
+                                                id: customer.id,
+                                            })
+                                        "
+                                    >
+                                        Edit
+                                    </Link>
+                                </Button>
                             </TableCell>
                         </TableRow>
                     </TableBody>

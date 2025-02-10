@@ -20,7 +20,7 @@ import {
     SunIcon,
 } from '@radix-icons/vue';
 import { useColorMode } from '@vueuse/core';
-import { computed, onMounted, onUnmounted, ref } from 'vue';
+import { computed, onMounted, onUnmounted, ref, watch } from 'vue';
 
 const isMobileSidebarOpen = ref(false);
 const closeMobileSidebar = () => {
@@ -34,6 +34,14 @@ const page = usePage();
 const { toast, dismiss } = useToast();
 
 const status = computed(() => page.props.status);
+
+watch(status, (value) => {
+    if (value) {
+        toast({
+            description: value,
+        });
+    }
+});
 
 onMounted(() => {
     window.addEventListener('resize', closeMobileSidebar);

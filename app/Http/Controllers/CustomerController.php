@@ -44,9 +44,9 @@ class CustomerController extends Controller
      */
     public function store(StoreCustomerRequest $request): RedirectResponse
     {
-        Customer::create([...$request->all(), 'user_id' => $request->user()->id]);
+        Customer::create([...$request->validated(), 'user_id' => $request->user()->id]);
 
-        return redirect('customers.index')->with('success', 'Customer created.');
+        return to_route('customers.index')->with('status', 'Customer created.');
     }
 
     /**
@@ -60,17 +60,21 @@ class CustomerController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Customer $customer)
+    public function edit(Customer $customer): Response
     {
-        //
+        return Inertia::render('Customers/Edit', [
+            'customer' => $customer,
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateCustomerRequest $request, Customer $customer)
+    public function update(UpdateCustomerRequest $request, Customer $customer): RedirectResponse
     {
-        //
+        $customer->update($request->validated());
+
+        return redirect()->back()->with('status', 'Customer updated.');
     }
 
     /**
@@ -78,6 +82,8 @@ class CustomerController extends Controller
      */
     public function destroy(Customer $customer)
     {
-        //
+        $customer->delete();
+
+        return to_route('customers.index')->with('status', 'Customer deleted.');
     }
 }

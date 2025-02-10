@@ -11,6 +11,8 @@ export interface Customer {
     vat?: string;
     email?: string;
     phone?: string;
+    iban?: string;
+    bank?: string;
     created_at: string;
 }
 
