@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import InputError from '@/Components/InputError.vue';
+import InputError from '@/components/InputError.vue';
 import {
     Breadcrumb,
     BreadcrumbItem,
@@ -7,42 +7,31 @@ import {
     BreadcrumbList,
     BreadcrumbPage,
     BreadcrumbSeparator,
-} from '@/Components/ui/breadcrumb';
-import { Button } from '@/Components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/Components/ui/card';
-import { Input } from '@/Components/ui/input';
-import { Label } from '@/Components/ui/label';
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import { Customer } from '@/types';
+} from '@/components/ui/breadcrumb';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import AuthenticatedLayout from '@/layouts/AuthenticatedLayout.vue';
 import { Head, Link, useForm } from '@inertiajs/vue3';
 
-const props = defineProps<{
-    customer: Customer;
-}>();
-
 const form = useForm({
-    name: props.customer.name,
-    vat: props.customer.vat,
-    email: props.customer.email,
-    phone: props.customer.phone,
-    iban: props.customer.iban,
-    bank: props.customer.bank,
+    name: '',
+    vat: '',
+    email: '',
+    phone: '',
+    iban: '',
+    bank: '',
 });
 
 const submit = () => {
-    form.patch(route('customers.update', { id: props.customer.id }));
-};
-
-const destroy = () => {
-    if (confirm('Are you sure you want to delete this customer?')) {
-        form.delete(route('customers.destroy', { id: props.customer.id }));
-    }
+    form.post(route('customers.store'));
 };
 </script>
 
 <template>
     <AuthenticatedLayout>
-        <Head :title="customer.name" />
+        <Head title="Create Customer" />
         <Breadcrumb>
             <BreadcrumbList>
                 <BreadcrumbItem>
@@ -57,22 +46,12 @@ const destroy = () => {
                     </BreadcrumbLink>
                 </BreadcrumbItem>
                 <BreadcrumbSeparator />
-                <BreadcrumbPage>Edit Customer</BreadcrumbPage>
+                <BreadcrumbPage>Create Customer</BreadcrumbPage>
             </BreadcrumbList>
         </Breadcrumb>
         <Card class="max-w-md">
             <CardHeader>
-                <CardTitle class="flex items-center justify-between">
-                    {{ props.customer.name }}
-                    <Button
-                        :disabled="form.processing"
-                        variant="destructive"
-                        class="w-fit"
-                        @click.prevent="destroy"
-                    >
-                        Delete
-                    </Button>
-                </CardTitle>
+                <CardTitle>Create Customer</CardTitle>
             </CardHeader>
             <CardContent class="grid gap-4">
                 <form @submit.prevent="submit" class="grid gap-4">
@@ -136,23 +115,13 @@ const destroy = () => {
                         />
                         <InputError :message="form.errors.bank" />
                     </div>
-                    <div class="flex justify-between">
-                        <Button
-                            :disabled="form.processing"
-                            variant="secondary"
-                            class="w-fit"
-                            @click.prevent="form.reset()"
-                        >
-                            Discard
-                        </Button>
-                        <Button
-                            :disabled="form.processing"
-                            type="submit"
-                            class="w-fit"
-                        >
-                            Save
-                        </Button>
-                    </div>
+                    <Button
+                        :disabled="form.processing"
+                        type="submit"
+                        class="ml-auto w-fit"
+                    >
+                        Create
+                    </Button>
                 </form>
             </CardContent>
         </Card>

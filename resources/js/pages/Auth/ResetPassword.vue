@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import AuthCard from '@/Components/AuthCard.vue';
-import InputError from '@/Components/InputError.vue';
-import { Button } from '@/Components/ui/button';
-import { Input } from '@/Components/ui/input';
-import { Label } from '@/Components/ui/label';
-import GuestLayout from '@/Layouts/GuestLayout.vue';
+import AuthCard from '@/components/AuthCard.vue';
+import InputError from '@/components/InputError.vue';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import GuestLayout from '@/layouts/GuestLayout.vue';
 import { Head, useForm } from '@inertiajs/vue3';
 
 const title = 'Reset Password';

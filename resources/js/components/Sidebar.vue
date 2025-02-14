@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import ApplicationLogo from '@/Components/ApplicationLogo.vue';
-import NavLink from '@/Components/NavLink.vue';
+import ApplicationLogo from '@/components/ApplicationLogo.vue';
+import NavLink from '@/components/NavLink.vue';
 import { Link } from '@inertiajs/vue3';
 import { BackpackIcon, HomeIcon } from '@radix-icons/vue';
 </script>

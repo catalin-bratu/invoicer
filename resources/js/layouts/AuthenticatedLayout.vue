@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import Sidebar from '@/Components/Sidebar.vue';
-import { Button } from '@/Components/ui/button';
+import Sidebar from '@/components/Sidebar.vue';
+import { Button } from '@/components/ui/button';
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -8,9 +8,9 @@ import {
     DropdownMenuLabel,
     DropdownMenuSeparator,
     DropdownMenuTrigger,
-} from '@/Components/ui/dropdown-menu';
-import { Sheet, SheetContent, SheetTrigger } from '@/Components/ui/sheet';
-import { Toaster, useToast } from '@/Components/ui/toast';
+} from '@/components/ui/dropdown-menu';
+import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
+import { Toaster, useToast } from '@/components/ui/toast';
 import { Link, usePage } from '@inertiajs/vue3';
 import {
     Half2Icon,
