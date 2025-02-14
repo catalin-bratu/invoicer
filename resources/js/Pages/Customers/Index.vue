@@ -75,13 +75,13 @@ const formatDateForDisplay = (date: string) =>
                 <CardDescription> Manage your customers. </CardDescription>
             </CardHeader>
             <CardContent class="space-y-4">
-                <div class="flex items-center justify-between">
+                <div class="flex flex-wrap items-center justify-between gap-4">
                     <Button size="sm" as-child>
                         <Link :href="route('customers.create')">
                             Create Customer
                         </Link>
                     </Button>
-                    <div class="relative w-56 items-center">
+                    <div class="relative basis-full items-center sm:basis-64">
                         <Input
                             v-model="searchQuery"
                             type="text"
@@ -107,7 +107,7 @@ const formatDateForDisplay = (date: string) =>
                             <TableHead>Phone</TableHead>
                             <TableHead>Email</TableHead>
                             <TableHead>Created at</TableHead>
-                            <TableHead>
+                            <TableHead class="w-px">
                                 <span class="sr-only">Edit</span>
                             </TableHead>
                         </TableRow>
